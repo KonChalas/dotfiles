@@ -15,8 +15,8 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = " "
+let g:mapleader = " "
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -81,6 +81,9 @@ map <F2> :retab <CR> :wq! <CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fast scrolling
+nnoremap <C-e>  3<C-e>
+nnoremap <C-y>  3<C-y>
 
 
 """"""""""""""""""""""""""""""
@@ -117,6 +120,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
 
 
 
@@ -138,4 +143,32 @@ filetype plugin indent on    " required
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => CtrlP settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_cmd = 'CtrlP .'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Buffergator settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+
+" Looper buffers
+let g:buffergator_mru_cycle_loop = 1
+
+" Go to the previous buffer open
+nmap <leader>jj :BuffergatorMruCyclePrev<cr>
+
+" Go to the next buffer open
+nmap <leader>kk :BuffergatorMruCycleNext<cr>
+
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
+
+" Shared bindings from Solution #1 from earlier
+nmap <leader>T :enew<cr>
+nmap <leader>bq :bp <BAR> bd #<cr>
