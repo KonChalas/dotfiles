@@ -154,4 +154,6 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
-exec --no-startup-id "pulseaudio --start
+exec --no-startup-id pulseaudio --start
+exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec --no-startup-id "xmodmap ~/speedswapper"
