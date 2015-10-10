@@ -16,6 +16,9 @@ set autoread
 " Set to auto write when you switch buffers, make it etc.
 set autowrite
 
+" Close scratch preview after completion is done
+"autocmd CompleteDone * pclose
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = " "
@@ -24,11 +27,17 @@ let g:mapleader = " "
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set relativenumber
 set nu
+
+" visual autocomplete for command menu
+set wildmenu            
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -68,7 +77,7 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
-set tw=500
+set tw=76
 
 set ai "Auto indent
 set si "Smart indent
@@ -117,7 +126,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'oblitum/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
@@ -145,6 +155,13 @@ filetype plugin indent on    " required
 " "
 " " see :h vundle for more details or wiki for FAQ
 " " Put your non-Plugin stuff after this line
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CtrlP settings
