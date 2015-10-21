@@ -129,13 +129,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'oblitum/YouCompleteMe'
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
-
+Plugin 'ludovicchabant/vim-gutentags'
 
 
 " All of your Plugins must be added before the following line
@@ -163,6 +162,15 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+"will put icons in Vim's gutter on lines that have a diagnostic set.
+""Turning this off will also turn off the YcmErrorLine and YcmWarningLine
+"highlighting
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CtrlP settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -189,6 +197,5 @@ nmap <leader>kk :BuffergatorMruCycleNext<cr>
 " View the entire list of buffers open
 nmap <leader>bl :BuffergatorOpen<cr>
 
-" Shared bindings from Solution #1 from earlier
 nmap <leader>T :enew<cr>
 nmap <leader>bq :bp <BAR> bd #<cr>
