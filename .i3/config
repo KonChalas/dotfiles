@@ -43,10 +43,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -55,10 +55,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -67,7 +67,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+semicolon split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -149,13 +149,53 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set $bg-color 	         #002b36
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# thin borders
+hide_edge_borders both
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+  	status_command i3status
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
 }
+
 bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`" -e fish
 exec --no-startup-id pulseaudio --start
-exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
-exec --no-startup-id "xmodmap ~/speedswapper"
+exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec_always --no-startup-id "redshift-gtk"
+exec_always --no-startup-id "xmodmap ~/speedswapper"
 exec --no-startup-id nm-applet --start
+
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
+bindsym XF86AudioLowerVolume exec amixer set Master 10%-
+bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous

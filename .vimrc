@@ -30,6 +30,13 @@ nmap <leader>w :w!<cr>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
+" Persistent undo
+set undofile
+set undodir=$HOME/.vim/undo
+
+set undolevels=1000
+set undoreload=10000
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,9 +86,17 @@ set tabstop=4
 set lbr
 set tw=76
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+"Auto indent
+set ai 
+
+"Smart indent
+set si 
+
+"Wrap lines
+set wrap
+
+"Highlight search matches
+set hlsearch
 
 map <F2> :retab <CR> :wq! <CR>
 
@@ -135,6 +150,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'Chiel92/vim-autoformat'
 
 
 " All of your Plugins must be added before the following line
@@ -158,7 +174,7 @@ filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -175,6 +191,8 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 " => CtrlP settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_cmd = 'CtrlP .'
+let g:ctrlp_max_files=0
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Buffergator settings
@@ -199,3 +217,10 @@ nmap <leader>bl :BuffergatorOpen<cr>
 
 nmap <leader>T :enew<cr>
 nmap <leader>bq :bp <BAR> bd #<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Gutentags settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%{gutentags#statusline()}
+
