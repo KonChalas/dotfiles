@@ -4,9 +4,6 @@
 " Sets how many lines of history VIM has to remember
 set history=700
 
-" Required by Vundle
-filetype off
-
 " be iMproved, required by Vundle
 set nocompatible
 
@@ -44,7 +41,7 @@ set relativenumber
 set nu
 
 " visual autocomplete for command menu
-set wildmenu            
+set wildmenu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -86,19 +83,22 @@ set tabstop=4
 set lbr
 set tw=76
 
-"Auto indent
-set ai 
+" Auto indent
+set ai
 
-"Smart indent
-set si 
+" Smart indent
+set si
 
-"Wrap lines
+" Wrap lines
 set wrap
 
-"Highlight search matches
+" Highlight search matches
 set hlsearch
 
-map <F2> :retab <CR> :wq! <CR>
+map <F2> :retab
+
+" Remove trailing characters
+autocmd BufWritePre * :%s/\s\+$//e
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -136,8 +136,10 @@ map 0 ^
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+
+" Required by Vundle
+filetype off
+
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -151,25 +153,16 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'mrtazz/DoxygenToolkit.vim'
+Plugin 'Raimondi/delimitMate'
+
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" To ignore plugin indent changes, instead use:
-" "filetype plugin on
-" "
-" " Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plugin stuff after this line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe settings
@@ -192,6 +185,9 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrlp_max_files=0
+" 1r - open the first file in the current window, and remaining opened as
+" hidden buffers.
+let g:ctrlp_open_multiple_files = '1r'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -224,3 +220,21 @@ nmap <leader>bq :bp <BAR> bd #<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline+=%{gutentags#statusline()}
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ultisnips settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => DoxygenToolkitsettings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
+let g:DoxygenToolkit_paramTag_pre="@Param "
+let g:DoxygenToolkit_returnTag="@Returns   "
