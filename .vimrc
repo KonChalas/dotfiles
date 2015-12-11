@@ -81,7 +81,12 @@ set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
+
+" Set text width
 set tw=76
+
+" Add color to text width limit
+set colorcolumn=76
 
 " Auto indent
 set ai
@@ -94,8 +99,6 @@ set wrap
 
 " Highlight search matches
 set hlsearch
-
-map <F2> :retab
 
 " Remove trailing characters
 autocmd BufWritePre * :%s/\s\+$//e
@@ -149,7 +152,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'Chiel92/vim-autoformat'
@@ -157,6 +160,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'mrtazz/DoxygenToolkit.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'mhinz/vim-startify'
 
 
 
@@ -184,11 +188,20 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 " => CtrlP settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_cmd = 'CtrlP .'
+let g:ctrl_working_path_mode = 'r'
 let g:ctrlp_max_files=0
-" 1r - open the first file in the current window, and remaining opened as
-" hidden buffers.
-let g:ctrlp_open_multiple_files = '1r'
 
+" all files as hidden buffers
+let g:ctrlp_open_multiple_files = 'ij'
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|o)$',
+  \ }
+
+" Easy bindings for its various modes
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bs :CtrlPMRU<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Buffergator settings
