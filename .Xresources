@@ -1,3 +1,5 @@
+#define FONT_SIZE       15
+
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -13,6 +15,8 @@
 *cursorColor:           S_base1
 *pointerColorBackground:S_base01
 *pointerColorForeground:S_base1
+
+*.scrollBar: false
 
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
@@ -54,4 +58,9 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
-*font: xft:Inconsolata:size=10:antialias=true:hinting=true
+
+!! font options
+*font: xft:DejaVu Sans Mono for Powerline:antialias=true:pixelsize=FONT_SIZE
+*boldFont: xft:DejaVu Sans Mono for Powerline:style=bold:antialias=true:pixelsize=FONT_SIZE
+*italicFont: xft:DejaVu Sans Mono for Powerline:style=italic:antialias=true:pixelsize=FONT_SIZE
+*boldItalicFont: xft:DejaVu Sans Mono for Powerline:style=bolditalic:antialias=true:pixelsize=FONT_SIZE

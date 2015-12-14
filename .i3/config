@@ -194,3 +194,6 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# Lock screen after 10 minutes
+exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
