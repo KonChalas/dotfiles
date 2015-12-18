@@ -21,6 +21,9 @@ set autowrite
 let mapleader = " "
 let g:mapleader = " "
 
+" Map enter to semicolon
+nnoremap <CR> :
+
 " Fast saving
 nmap <leader>w :w!<cr>
 
@@ -143,7 +146,6 @@ call vundle#begin()
 " Required by Vundle
 filetype off
 
-
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'oblitum/YouCompleteMe'
@@ -161,8 +163,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'mrtazz/DoxygenToolkit.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mhinz/vim-startify'
-
-
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -189,7 +190,6 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_cmd = 'CtrlP .'
 let g:ctrl_working_path_mode = 'r'
-let g:ctrlp_max_files=0
 
 " all files as hidden buffers
 let g:ctrlp_open_multiple_files = 'ij'
@@ -246,8 +246,13 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => DoxygenToolkitsettings
+" => DoxygenToolkit settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:DoxygenToolkit_briefTag_pre="@Synopsis  "
 let g:DoxygenToolkit_paramTag_pre="@Param "
 let g:DoxygenToolkit_returnTag="@Returns   "
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Easymotion settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Leader> <Plug>(easymotion-prefix)
