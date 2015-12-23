@@ -188,8 +188,15 @@ let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => CtrlP settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_cmd = 'CtrlP .'
+" let the .git direcory be the root directory
 let g:ctrl_working_path_mode = 'r'
+
+" seach by filename
+let g:ctrlp_by_filename = 1
+
+" search the whole tree
+let g:ctrlp_max_files = 80000
+let g:ctrlp_max_depth = 40
 
 " all files as hidden buffers
 let g:ctrlp_open_multiple_files = 'ij'
