@@ -131,6 +131,9 @@ set laststatus=2
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" Remap VIM - to last non-blank character
+map - $
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

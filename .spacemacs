@@ -20,6 +20,7 @@ values."
             c-c++-enable-clang-support t
             c-c++-default-mode-for-headers 'c++-mode)
      (auto-completion :variables
+            auto-completion-enable-snippets-in-popup t
             auto-completion-enable-help-tooltip t)
      emacs-lisp
      git
@@ -28,6 +29,7 @@ values."
             shell-default-position 'bottom)
      syntax-checking
      version-control
+     gtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -92,7 +94,7 @@ values."
    ;; (default "C-M-m)
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
 
-   ;; The command key used for Evil commands. (ex-commands) 
+   ;; The command key used for Evil commands. (ex-commands)
    dotspacemacs-command-key ":"
 
    ;; If non nil `Y' is remapped to `y$'. (default t)
@@ -168,7 +170,13 @@ values."
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Enable auto-complete
-  (global-company-mode)
+  (add-hook 'prog-mode-hook 'company-mode)
+
+  ;; Remove auto-completion delay
+  (setq company-idle-delay 0)
+
+  ;; Start auto-complete from first character
+  (setq company-minimum-prefix-length 1)
 
   ;; Set to auto-write when you switch buffers, change widnow etc.
   (defadvice switch-to-buffer (before save-buffer-now activate)
@@ -176,6 +184,14 @@ values."
   (defadvice other-window (before other-window-now activate)
     (when buffer-file-name (save-buffer)))
   (defadvice other-frame (before other-frame-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice evil-window-left (before other-frame-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice evil-window-right (before other-frame-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice evil-window-up (before other-frame-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice evil-window-down (before other-frame-now activate)
     (when buffer-file-name (save-buffer)))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -202,7 +218,7 @@ values."
         undo-tree-history-directory-alist
         `(("." . ,(concat spacemacs-cache-directory "undo"))))
   (unless (file-exists-p (concat spacemacs-cache-directory "undo"))
-    (make-directory (concat spacemacs-cache-directory "undo"))) 
+    (make-directory (concat spacemacs-cache-directory "undo")))
 
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -222,14 +238,17 @@ values."
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
 
-  ;; Use spaces instead of tabs
-  (setq-default indent-tabs-mode nil)
+  ;; Indent offset to 4 for C and C++
+  (setq c-default-style "linux"
+    c-basic-offset 4)
 
-  ;; 1 tab == 4 spaces
-  (setq-default tab-width 4)
+  ;; Set text width
+  (setq-default fill-column 76)
+  (add-hook 'prog-mode-hook (
+   lambda ()
+    (fci-mode 1)
+  ))
 
-  ;; Use the insert-tab function 
-  (setq indent-line-function 'insert-tab)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; => Moving around
@@ -242,6 +261,8 @@ values."
   ;; Remap VIM 0 to first non-blank character
   (define-key evil-normal-state-map (kbd "0") (kbd "^"))
 
+  ;; Remap VIM $ to -
+  (define-key evil-normal-state-map (kbd "-") (kbd "$"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; => Powerline
