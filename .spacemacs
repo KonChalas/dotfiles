@@ -24,12 +24,11 @@ values."
             auto-completion-enable-help-tooltip t)
      emacs-lisp
      git
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
+     shell
      syntax-checking
      version-control
      gtags
+     org
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -178,6 +177,9 @@ values."
   ;; Start auto-complete from first character
   (setq company-minimum-prefix-length 1)
 
+  ;; Set fish as the default multi-term-program
+  (setq multi-term-program "/bin/fish")
+
   ;; Set to auto-write when you switch buffers, change widnow etc.
   (defadvice switch-to-buffer (before save-buffer-now activate)
     (when buffer-file-name (save-buffer)))
@@ -201,6 +203,9 @@ values."
   ;; Line numbers
   (add-hook 'prog-mode-hook #'linum-mode)
   (add-hook 'prog-mode-hook #'linum-relative-toggle)
+
+  ;; Add golden-ratio ratio for window resizing
+  (golden-ratio-mode 1)
 
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -274,6 +279,11 @@ values."
   ;; => Editing mappings
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  ;; Overide C-p and C-j behaviour when using term-mode
+  (add-hook 'term-mode-hook (lambda ()
+                              (define-key evil-insert-state-map (kbd "C-p") 'term-send-up)
+                              (define-key evil-insert-state-map (kbd "C-n") 'term-send-down)
+                              ))
 
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -295,8 +305,10 @@ values."
  '(company-tooltip-common-selection
    ((t
      (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(safe-local-variable-values (quote nil))
- )
+ '(safe-local-variable-values
+   (quote
+    ((company-clang-arguments "-D__KERNEL__" "-DMODULE" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/linux/kconfig.h" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/asm/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/generated/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/")
+     (flycheck-clang-include-path "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/asm/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/generated/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/")))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
