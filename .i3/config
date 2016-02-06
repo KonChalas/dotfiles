@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Source Code Sans for Powerline 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -86,13 +86,18 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
+
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -101,16 +106,22 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+1 move container to $workspace1
+bindsym $mod+Shift+2 move container to $workspace2
+bindsym $mod+Shift+3 move container to $workspace3
+bindsym $mod+Shift+4 move container to $workspace4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# Program Workspaces
+assign [class="Chromium"] $workspace1
+assign [class="Emacs"] $workspace2
+assign [class="Thunderbird"] $workspace3
+assign [class="Vlc"] $workspace4
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -164,6 +175,7 @@ hide_edge_borders both
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    font pango:Source Code Sans, FontAwesome 9
   	status_command i3status
 	colors {
 		background $bg-color
@@ -175,28 +187,30 @@ bar {
 	}
 }
 
+
 # move workspace to left monitor
 bindsym $mod+m move workspace to output left
-
-bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`" -e fish
-exec --no-startup-id pulseaudio --start
-exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
-exec --no-startup-id "redshift-gtk"
-exec_always --no-startup-id "setxkbmap -option caps:swapescape"
-exec --no-startup-id nm-applet --start
-
-bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
-bindsym XF86AudioLowerVolume exec amixer set Master 10%-
-bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
-# Media player controls
+# Volume & Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
+bindsym XF86AudioLowerVolume exec amixer set Master 10%-
+bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # Lock screen after 10 minutes
 exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
+
+bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`" -e fish
+
+# Misc 
+exec --no-startup-id pulseaudio --start
+exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec --no-startup-id "redshift-gtk"
+exec_always --no-startup-id "setxkbmap -option caps:swapescape"
+exec --no-startup-id nm-applet --start

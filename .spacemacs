@@ -74,7 +74,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -279,7 +279,6 @@ values."
   ;; => Editing mappings
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; Overide C-p and C-j behaviour when using term-mode
   (add-hook 'term-mode-hook (lambda ()
                               (define-key evil-insert-state-map (kbd "C-p") 'term-send-up)
                               (define-key evil-insert-state-map (kbd "C-n") 'term-send-down)

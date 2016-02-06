@@ -1,4 +1,4 @@
-#define FONT_SIZE       15
+#define FONT_SIZE       14
 
 #define S_base03        #002b36
 #define S_base02        #073642
@@ -9,14 +9,21 @@
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-*background:            S_base03
-*foreground:            S_base0
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+URxvt.background:            S_base03
+URxvt.foreground:            S_base0
+URxvt.fadeColor:             S_base03
+URxvt.cursorColor:           S_base1
+URxvt.pointerColorBackground:S_base01
+URxvt.pointerColorForeground:S_base1
 
-*.scrollBar: false
+! do not scroll with output
+URxvt.scrollTtyOutput: false
+
+! scroll back to the bottom on keypress
+URxvt.scrollTtyKeypress: true
+
+! disable the scrollbar
+URxvt.scrollBar: false
 
 #define S_yellow        #b58900
 #define S_orange        #cb4b16
@@ -28,39 +35,53 @@
 #define S_green         #859900
 
 !! black dark/light
-*color0:                S_base02
-*color8:                S_base03
+URxvt.color0:                S_base02
+URxvt.color8:                S_base03
 
 !! red dark/light
-*color1:                S_red
-*color9:                S_orange
+URxvt.color1:                S_red
+URxvt.color9:                S_orange
 
 !! green dark/light
-*color2:                S_green
-*color10:               S_base01
+URxvt.color2:                S_green
+URxvt.color10:               S_base01
 
 !! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
+URxvt.color3:                S_yellow
+URxvt.color11:               S_base00
 
 !! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
+URxvt.color4:                S_blue
+URxvt.color12:               S_base0
 
 !! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
+URxvt.color5:                S_magenta
+URxvt.color13:               S_violet
 
 !! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
+URxvt.color6:                S_cyan
+URxvt.color14:               S_base1
 
 !! white dark/light
-*color7:                S_base2
-*color15:               S_base3
+URxvt.color7:                S_base2
+URxvt.color15:               S_base3
 
 !! font options
-*font: xft:DejaVu Sans Mono for Powerline:antialias=true:pixelsize=FONT_SIZE
-*boldFont: xft:DejaVu Sans Mono for Powerline:style=bold:antialias=true:pixelsize=FONT_SIZE
-*italicFont: xft:DejaVu Sans Mono for Powerline:style=italic:antialias=true:pixelsize=FONT_SIZE
-*boldItalicFont: xft:DejaVu Sans Mono for Powerline:style=bolditalic:antialias=true:pixelsize=FONT_SIZE
+
+URxvt.font: xft:Source Code Pro for Powerline:antialias=true:pixelsize=FONT_SIZE
+URxvt.boldFont: xft:Source Code Pro for Powerline:style=bold:antialias=true:pixelsize=FONT_SIZE
+URxvt.italicFont: xft:Source Code Pro for Powerline:style=italic:antialias=true:pixelsize=FONT_SIZE
+URxvt.boldItalicFont: xft:Source Code Pro for Powerline:style=bolditalic:antialias=true:pixelsize=FONT_SIZE
+
+!! rofi
+rofi.columns:                        2
+rofi.bw:                             2
+rofi.terminal:                       urxvt
+rofi.font:                           hermit bold 7
+rofi.color-enabled:                  true
+!                                       bg      fg    bgalt    hlbg    hlbg
+rofi.color-normal:                   #101010,#3a81fa,#131313,#d10047,#101010
+rofi.color-urgent:                   #101010,#f00060,#131313,#d10047,#101010
+rofi.color-active:                   #101010,#00ff77,#131313,#d10047,#101010
+!                                       bg    border
+rofi.color-window:                   #101010,#202020
