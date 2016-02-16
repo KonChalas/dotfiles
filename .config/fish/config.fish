@@ -17,7 +17,14 @@ alias lock='i3lock -c 000000'
 alias emc='emacsclient -c -a ""'
 alias emt='emacsclient -t -a ""'
 
-alias e='emacsclient'
+function e
+    emacsclient $argv[1] &
+end
+
+function emc
+    emacsclient -c -a "" $argv[1] &
+end
+
 
 set -Ux fish_user_paths $fish_user_paths ~/Workspace/gcc-linaro-4.9-2014.11-x86_64_aarch64-linux-gnu/bin ~/go/bin
 

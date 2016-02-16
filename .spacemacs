@@ -24,7 +24,10 @@ values."
             auto-completion-enable-help-tooltip t)
      emacs-lisp
      git
-     shell
+     (shell :variables
+            shell-default-position 'bottom
+            shell-default-height 30
+            shell-default-term-shell "/bin/fish")
      syntax-checking
      version-control
      gtags
@@ -237,9 +240,6 @@ values."
      (setq flycheck-clang-language-standard "c++11")
   ))
 
-  ;; syntax checking
-  (setq flycheck-check-syntax-automatically '(mode-enabled save))
-
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
 
@@ -306,8 +306,7 @@ values."
      (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(safe-local-variable-values
    (quote
-    ((company-clang-arguments "-D__KERNEL__" "-DMODULE" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/linux/kconfig.h" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/asm/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/generated/" "-I/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/")
-     (flycheck-clang-include-path "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/asm/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/arch/arm64/include/generated/" "/home/konstantinos/Workspace/eusrv-linux-junor1-without-fs/include/")))))
+    ())))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
