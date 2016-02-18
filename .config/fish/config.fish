@@ -25,6 +25,10 @@ function emc
     emacsclient -c -a "" $argv[1] &
 end
 
+function weather
+    curl  "http://wttr.in/$argv[1]"
+end
+
 
 set -Ux fish_user_paths $fish_user_paths ~/Workspace/gcc-linaro-4.9-2014.11-x86_64_aarch64-linux-gnu/bin ~/go/bin
 
