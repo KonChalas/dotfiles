@@ -21,7 +21,10 @@ values."
             c-c++-default-mode-for-headers 'c++-mode)
      (auto-completion :variables
             auto-completion-enable-snippets-in-popup t
-            auto-completion-enable-help-tooltip t)
+            auto-completion-enable-help-tooltip t
+            auto-completion-private-snippets-directory "~/.emacs.d/snippets/")
+
+
      emacs-lisp
      git
      (shell :variables
@@ -63,7 +66,10 @@ values."
    dotspacemacs-startup-lists '(recents projects)
 
    ;; List of themes.
-   dotspacemacs-themes '(solarized-dark
+   dotspacemacs-themes '(gruvbox
+                         molokai
+                         monokai
+                         solarized-dark
                          spacemacs-dark
                          spacemacs-light
                          solarized-light
@@ -183,6 +189,13 @@ values."
   ;; Set fish as the default multi-term-program
   (setq multi-term-program "/bin/fish")
 
+  ;; Save buffer on focus lost
+  (add-hook 'focus-out-hook
+            (defun save-current-buffer-if-needed ()
+              (interactive)
+              (when (and (buffer-file-name) (buffer-modified-p))
+                (save-buffer))))
+
   ;; Set to auto-write when you switch buffers, change widnow etc.
   (defadvice switch-to-buffer (before save-buffer-now activate)
     (when buffer-file-name (save-buffer)))
@@ -204,8 +217,7 @@ values."
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; Line numbers
-  (add-hook 'prog-mode-hook #'linum-mode)
-  (add-hook 'prog-mode-hook #'linum-relative-toggle)
+  (global-linum-mode)
 
   ;; Add golden-ratio ratio for window resizing
   (golden-ratio-mode 1)
@@ -232,13 +244,6 @@ values."
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; => Text, tab and indent related
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;; Bind clang-format-buffer to tab on the c++-mode only:
-  (add-hook 'c++-mode-hook
-   (lambda ()
-     (setq company-clang-arguments '("-std=c++11"))
-     (setq flycheck-clang-language-standard "c++11")
-  ))
 
   ;; Bind clang-format-region to C-M-tab in all modes:
   (global-set-key [C-M-tab] 'clang-format-region)
@@ -284,34 +289,11 @@ values."
                               (define-key evil-insert-state-map (kbd "C-n") 'term-send-down)
                               ))
 
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; => Misc
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  (setq custom-file "~/.emacs.d/private/custom.el")
+  (load custom-file)
+
 )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common
-   ((t
-     (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection
-   ((t
-     (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(safe-local-variable-values
-   (quote
-    ())))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

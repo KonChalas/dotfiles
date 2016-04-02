@@ -1,70 +1,48 @@
 #define FONT_SIZE       14
-
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
-
-URxvt.background:            S_base03
-URxvt.foreground:            S_base0
-URxvt.fadeColor:             S_base03
-URxvt.cursorColor:           S_base1
-URxvt.pointerColorBackground:S_base01
-URxvt.pointerColorForeground:S_base1
-
 ! do not scroll with output
 URxvt.scrollTtyOutput: false
-
+! 
 ! scroll back to the bottom on keypress
 URxvt.scrollTtyKeypress: true
-
+ 
 ! disable the scrollbar
 URxvt.scrollBar: false
+! -----------------------------------------------------------------------------
+! File: gruvbox-dark.xresources
+! Description: Retro groove colorscheme generalized
+! Author: morhetz <morhetz@gmail.com>
+! Source: https://github.com/morhetz/gruvbox-generalized
+! Last Modified: 6 Sep 2014
+! -----------------------------------------------------------------------------
 
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-!! black dark/light
-URxvt.color0:                S_base02
-URxvt.color8:                S_base03
-
-!! red dark/light
-URxvt.color1:                S_red
-URxvt.color9:                S_orange
-
-!! green dark/light
-URxvt.color2:                S_green
-URxvt.color10:               S_base01
-
-!! yellow dark/light
-URxvt.color3:                S_yellow
-URxvt.color11:               S_base00
-
-!! blue dark/light
-URxvt.color4:                S_blue
-URxvt.color12:               S_base0
-
-!! magenta dark/light
-URxvt.color5:                S_magenta
-URxvt.color13:               S_violet
-
-!! cyan dark/light
-URxvt.color6:                S_cyan
-URxvt.color14:               S_base1
-
-!! white dark/light
-URxvt.color7:                S_base2
-URxvt.color15:               S_base3
+! hard contrast: *background: #1d2021
+URxvt.background: #282828
+! soft contrast: *background: #32302f
+URxvt.foreground: #ebdbb2
+! Black + DarkGrey
+URxvt.color0:  #282828
+URxvt.color8:  #928374
+! DarkRed + Red
+URxvt.color1:  #cc241d
+URxvt.color9:  #fb4934
+! DarkGreen + Green
+URxvt.color2:  #98971a
+URxvt.color10: #b8bb26
+! DarkYellow + Yellow
+URxvt.color3:  #d79921
+URxvt.color11: #fabd2f
+! DarkBlue + Blue
+URxvt.color4:  #458588
+URxvt.color12: #83a598
+! DarkMagenta + Magenta
+URxvt.color5:  #b16286
+URxvt.color13: #d3869b
+! DarkCyan + Cyan
+URxvt.color6:  #689d6a
+URxvt.color14: #8ec07c
+! LightGrey + White
+URxvt.color7:  #a89984
+URxvt.color15: #ebdbb2
 
 !! font options
 
