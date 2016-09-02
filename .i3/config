@@ -36,7 +36,7 @@ bindsym $mod+Return exec i3-sensible-terminal -e fish
 bindsym $mod+Shift+q kill
 
 # exec a program launcher
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -p "run:" -font "snap 12" -bg "#222222" -fg "#888888" -hlbg "#285577" -hlfg "#ffffff" -opacity 90 location 2'
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='rofi -i -dmenu -p "run:" -font "snap 12" -bg "#222222" -fg "#888888" -hlbg "#285577" -hlfg "#ffffff" -opacity 90 location 2'
 
 # change focus
 bindsym $mod+h focus left
@@ -93,6 +93,7 @@ set $workspace2 "2: "
 set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: "
+set $workspace6 "6: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -100,7 +101,7 @@ bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace 6
+bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -112,7 +113,7 @@ bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -123,6 +124,8 @@ assign [class="Chromium"] $workspace1
 assign [class="Emacs"] $workspace2
 assign [class="Thunderbird"] $workspace4
 assign [class="Vlc"] $workspace5
+assign [class="Rhythmbox"] $workspace5
+assign [class="Evince"] $workspace6
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -157,7 +160,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-set $bg-color 	         #002b36
+set $bg-color 	         #282828
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -177,7 +180,7 @@ hide_edge_borders both
 # finds out, if available)
 bar {
     font pango:Source Code Sans, FontAwesome 9
-  	status_command i3status
+    status_command py3status -c ~/Workspace/dotfiles/.i3status.conf
 	colors {
 		background $bg-color
 	    separator #757575
@@ -204,18 +207,17 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
 bindsym XF86AudioLowerVolume exec amixer set Master 10%-
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-# Background
-exec --no-startup-id xsetroot -solid "#004444"
+# Lock screen
+bindsym Control+mod1+l exec lock -gf Open-Sans-Light
 
-# Lock screen after 10 minutes
-exec --no-startup-id xautolock -time 10 -locker i3lock -c 000000
-
+# Open terminal in same directory
 bindsym $mod+Shift+Return exec i3-sensible-terminal -cd "`xcwd`" -e fish
 
-# Misc 
+# Misc
 exec --no-startup-id pulseaudio --start
-exec_always --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
-exec --no-startup-id "redshift-gtk"
+exec_always --no-startup-id "setxkbmap -layout us,gr -option grp:shifts_toggle"
+exec --no-startup-id "redshift-gtk -l 35.341846:25.148254"
+exec_always --no-startup-id "feh --bg-scale ~/.wallpapers/gnu_wallpaper.jpg"
 exec_always --no-startup-id "setxkbmap -option caps:swapescape"
 
 exec --no-startup-id nm-applet --start
